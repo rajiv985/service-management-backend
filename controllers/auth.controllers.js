@@ -125,6 +125,27 @@ const login = async (req, res, next) => {
     console.error("Error during login:", error);
     return next(new ApiError(500, "Error during login"));
   }
+};   
+
+
+const getProfile = async (req, res, next) => {
+  try {
+    const userId = req.user.id; 
+
+    const user = await User.findById(userId).select("-password -refreshToken"); 
+    
+    if (!user) {
+      return next(new ApiError(404, "User not found"));
+    }
+
+    res.status(200).json(
+      new ApiResponse(200, "User profile fetched successfully", user)
+    );
+
+  } catch (error) {
+    console.error("Error fetching profile:", error);
+    next(new ApiError(500, "Error fetching user profile"));
+  }
 };
 
-export { register, login };
+export { register, login, getProfile };
