@@ -8,9 +8,9 @@ import ApiResponse from "../utils/apiResponse.js";
 const generateTokens = (user) => {
   const accessToken = jwt.sign(
     {
-      data: { id: user._id, role: user.role }, // ✅ Match verifyUser
+      data: { id: user._id, role: user.role }, 
     },
-    process.env.ACCESS_TOKEN_SECRET, // ✅ Match verifyUser secret name
+    process.env.ACCESS_TOKEN_SECRET, 
     { expiresIn: "15m" }
   );
 
