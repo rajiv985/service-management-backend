@@ -9,7 +9,7 @@ export const verifyUser= async(req, _, next)=>{
         //console.log("Access Token:", req.cookies);
 
         if(!accessToken){
-            throw new ApiError(401,"Unauthorized request")
+            throw new ApiError(401,"Unauthorized request")  
         } 
 
     const decodedToken= jwt.verify(accessToken,process.env.ACCESS_TOKEN_SECRET)
